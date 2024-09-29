@@ -1,12 +1,28 @@
 let color = "black";
+let click = false;
 
 document.addEventListener("DOMContentLoaded", () => {
     createBoard(16);
+
+    const message = document.querySelector("#message");
+    message.style.color = "white";
+    message.textContent = "Tap screen to draw || Tap again to stop drawing";
 
     const sizeButton = document.querySelector("#popup");
     sizeButton.addEventListener("click", () => {
         const size = chooseSize();
         createBoard(size);
+    });
+
+    document.querySelector("body").addEventListener("click", (e) => {
+        if (e.target.tagName != "BUTTON") {
+            click = !click;
+            if (click) {
+                message.textContent = "You can draw";
+            } else {
+                message.textContent = "Tap screen to draw";
+            }
+        }
     });
 
     const blackButton = document.querySelector("#blackButton");
@@ -38,23 +54,25 @@ function chooseSize() {
     const pop = parseInt(prompt("Choose board size: "));
     if (pop === null) return;
     const size = parseInt(pop);
-    const message = document.querySelector("#message") ;
+    const message = document.querySelector("#message");
     message.style.color = "white";
     if (isNaN(size)) {
         message.textContent = "Please enter a valid number!";
     } else if (size <= 0 || size > 100) {
         message.textContent = "Please choose a number between 1 and 100";
     } else {
-        message.textContent = "Now you can play!";
+        message.textContent = "Tap screen to draw";
         return size;
     }
 }
 
 function colorDiv() {
-    if (color === "random") {
-        this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-    } else {
-        this.style.backgroundColor = "black";
+    if (click === true) {
+        if (color === "random") {
+            this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        } else {
+            this.style.backgroundColor = "black";
+        }
     }
 }
 
