@@ -16,12 +16,12 @@ body {
     padding: 20px;
 }
 
-p {
-    color: white;
-}
+
 
 .board {
-    padding: 300px;
+    display: grid;
+    height: 600px;
+    width: 600px;
     border: 2px solid black;
 }
 
@@ -29,5 +29,6 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
+    padding: 20px;
+    color: white;
 }
